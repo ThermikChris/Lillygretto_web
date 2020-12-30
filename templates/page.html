@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/styles.css?version=4" />
+  </head>
+<body>
+
+<!-- <h1>Current count of Player: {{content}}</h1>
+<form action="/game_change" method="get">
+    <input type="range" name="player_range" min="2" max="10" default="3"/>
+    <input type="submit" value="Spieler Anzahl senden" />
+</form>  -->
+<form action="/game_change" method="get">
+  <select name="game">
+    <option>Demo Spiel</option>
+  </select>
+  <select name="game">
+    <option>Neues Spiel erstellen</option>
+    <option>Spiel laden</option>
+    <option>Spiel löschen</option>
+  </select>
+  <input type="submit" value="OK" name="btn_game"/>
+</form>
+
+
+<table style="width:100%">
+  <tr>
+    <!-- HEADER -->
+    {% set i = namespace(value=0) %}
+    <th>RUNDE</th>
+    {% for header in player_heading %}
+    {% set i.value = i.value + 1 %}
+    <th>
+      <form action="/game_change" method="get">
+        <input type="text" placeholder = "Spieler{{i.value}}" value={{ header }} name="player_{{i.value}}"/>
+      </form>
+    </th>
+    {% endfor %}
+    <td rowspan={{count_rows}}>
+      <form action="/game_change" method="get">
+        <input type="submit" value="Neuer Spieler" name="btn_newPlayer" style="width:100%;height:100px;"/>
+      </form>
+    </td>
+  </tr>
+
+  {% for i_g in range(data|length) %}
+  <!-- MINUS -->
+  <tr class="minus_row">
+      <td>{{ i_g+1 }} - Minus</td>
+      {% set i = namespace(value=0) %}
+      {% for player_val in data[i_g]['minus_points'] %}
+      {% set i.value = i.value + 1 %}
+      <td>
+        <form action="/game_change" method="get">
+          <!-- <input type="text" placeholder="000" value="{{ i_g+1 }}_minus_{{ i.value }}_cell" name="{{ i_g+1 }}_minus_{{ i.value }}_cell"/> -->
+          <input type="text" placeholder="000" value="{{ player_val }}" name="{{ i_g+1 }}_minus_{{ i.value }}_cell"/>
+        </form>
+      </td>
+      {% endfor %}
+  </tr>
+  <!-- PLUS -->
+  <tr class="plus_row">
+      <td>{{ i_g+1 }} - Plus</td>
+      {% set i = namespace(value=0) %}
+      {% for player_val in data[i_g]['plus_points'] %}
+      {% set i.value = i.value + 1 %}
+      <td>
+        <form action="/game_change" method="get">
+          <!-- <input type="text" placeholder="000" value="{{ i_g+1 }}_plus_{{ i.value }}_cell" name="{{ i_g+1 }}_plus_{{ i.value }}_cell"/> -->
+          <input type="text" placeholder="000" value="{{ player_val }}" name="{{ i_g+1 }}_plus_{{ i.value }}_cell"/>
+        </form>
+      </td>
+      {% endfor %}
+  </tr>
+  <!-- GAME-ROUND -->
+  <tr class="game_round_row">
+      <td>{{ i_g + 1 }} - Runde</td>
+      {% for p in data[i_g]['round_points'] %}
+      <td>{{ p }}</td>
+      {% endfor %}
+  </tr>
+  <!-- GAME-STATE -->
+  <tr class="game_state_row">
+      <td>{{ i_g + 1 }} - SPIELSTAND</td>
+      {% for p in data[i_g]['game_points'] %}
+      <td>{{ p }}</td>
+      {% endfor %}
+  </tr>
+
+  {% endfor %}
+
+  <tr>
+    <td colspan={{count_cols}}>
+      <form action="/game_change" method="get">
+        <input type="submit" value="Neue Runde" name="btn_newRound" style="width:100%;height:100%;"/>
+      </form>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html> 

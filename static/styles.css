@@ -1,0 +1,18 @@
+.round_clac {
+    font-size: smaller;
+    background-color: honeydew;
+}
+
+.game_round_row {
+    background-color: gray;
+    font-size: medium;
+}
+
+.game_state_row {
+    background-color: green;
+    font-size: large;
+}
+
+th {
+    background-color: black;
+}
