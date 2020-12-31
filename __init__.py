@@ -4,7 +4,7 @@ from backend import get_init_player, get_init_game, next_round, set_new_player, 
 
 app = Flask(__name__)
 app.secret_key = "lillygretto"
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///useres.sqlite3'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
 # app.config['SQLALCHEMY_TRACK_MODIFCATIONS'] = False
 #app.permanent_session_lifetime
 
@@ -37,7 +37,13 @@ def home():
     game_data = calc_game_state(game_data, count_player)
     session['player'] = player
     session['game_data'] = game_data
-    return render_template("page.html", count_cols = count_player+1, count_rows = count_rounds*4, player_heading=player, data=game_data)
+    return render_template(
+        "page.html", 
+        count_cols = count_player+1, 
+        count_rows = count_rounds*4, 
+        player_heading=player, 
+        data=game_data
+    )
 
 @app.route("/game_change", methods=["GET", "POST"])
 def game_change():
