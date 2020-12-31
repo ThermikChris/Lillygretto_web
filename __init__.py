@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from backend import get_init_player, get_init_game, next_round, set_new_player, calc_game_state
 # from flask_sqlalchemy import SQLAlchemy
+import json
+import plotly
+import chart_studio.plotly as py
+import plotly.graph_objs as go
+import numpy as np
 
 app = Flask(__name__)
 app.secret_key = "lillygretto"
@@ -37,12 +42,14 @@ def home():
     game_data = calc_game_state(game_data, count_player)
     session['player'] = player
     session['game_data'] = game_data
+    graphJSON = plot_game_state(game_data, player)
     return render_template(
         "page.html", 
         count_cols = count_player+1, 
         count_rows = count_rounds*4, 
         player_heading=player, 
-        data=game_data
+        data=game_data,
+        graphJSON=graphJSON
     )
 
 @app.route("/game_change", methods=["GET", "POST"])
@@ -97,6 +104,28 @@ def game_change():
     session['game_data'] = game_data
     return redirect(url_for('home'))
 
+def plot_game_state(game_data, player):
+    round_count = len(game_data)
+    print(round_count)
+
+    xScale = np.linspace(1, round_count, round_count)
+
+    # Create traces
+    data = []
+    for i_p in range(len(player)):
+        y = []
+        for i_g in range(len(game_data)):
+            y.append(game_data[i_g]['game_points'][i_p])
+        trace_i = go.Scatter(
+            x = xScale,
+            y = y,
+            name = player[i_p]
+        )
+        data.append(trace_i)
+
+    graphJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return graphJSON
 
 if __name__ == "__main__":
     # db.create_all()
