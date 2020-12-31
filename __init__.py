@@ -53,7 +53,7 @@ def game_change():
         game_data = session['game_data']
         count_player = len(player)
         count_rounds = len(game_data)
-        if request.args.get('btn_game') == 'OK':
+        if request.args.get('btn_game') == 'Reset Session':
             print("CLEAR SESSION")
             session.clear()
             return redirect(url_for('home'))
