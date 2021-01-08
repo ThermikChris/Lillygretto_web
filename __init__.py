@@ -106,7 +106,6 @@ def game_change():
 
 def plot_game_state(game_data, player):
     round_count = len(game_data)
-    print(round_count)
 
     xScale = np.linspace(1, round_count, round_count)
 
