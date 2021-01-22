@@ -30,11 +30,12 @@ def set_new_player(game_data):
 # GAME-STATE
 def calc_game_state(game, count_player):
     new_game_state = []
+    # for each round
     for i_g in range(len(game)):
         g = game[i_g]
         minus_points = g['minus_points']
         plus_points = g['plus_points']
-        round_points = [sum(x) for x in zip(minus_points, plus_points)]
+        round_points = [x2-x1 for (x1, x2) in zip(minus_points, plus_points)]
         if i_g == 0:
             game_points = round_points
         else:
