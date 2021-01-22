@@ -18,7 +18,7 @@ app.secret_key = "lillygretto"
 # class users(db.Model):
 #     _id = db.Column("id", db.Integer, primary_key=True)
 #     game = db.Column(db.String(100))
-    
+
 #     def __init__(self, game):
 #         self.game = game
 
@@ -42,14 +42,12 @@ def home():
     game_data = calc_game_state(game_data, count_player)
     session['player'] = player
     session['game_data'] = game_data
-    graphJSON = plot_game_state(game_data, player)
     return render_template(
-        "page.html", 
-        count_cols = count_player+1, 
-        count_rows = count_rounds*4, 
-        player_heading=player, 
-        data=game_data,
-        graphJSON=graphJSON
+        "page.html",
+        count_cols = count_player+1,
+        count_rows = count_rounds*4,
+        player_heading=player,
+        data=game_data
     )
 
 @app.route("/game_change", methods=["GET", "POST"])
@@ -108,7 +106,7 @@ def game_change():
                 points = game_data[int(split_str_req[0])-1][point_name]
                 points[int(split_str_req[2])-1] = val_req
         game_data = calc_game_state(game_data, count_player)
-    
+
     session['player'] = player
     session['game_data'] = game_data
     return redirect(url_for('home'))
