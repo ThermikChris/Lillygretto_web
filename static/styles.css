@@ -35,4 +35,6 @@ td {
 .input_number {
     height: 70pt;
     width: 90%;
+    font-size: 40pt;
+    text-align: center;
 }
