@@ -1,18 +1,42 @@
-.round_clac {
-    font-size: smaller;
-    background-color: honeydew;
+th {
+    background-color: blue;
+    height: 30pt;
 }
 
-.game_round_row {
-    background-color: gray;
-    font-size: medium;
+td {
+    text-align: center;
+    font-size: 20pt;
 }
 
 .game_state_row {
-    background-color: green;
+    background-color: #fbff00;
+    height: 30pt;
     font-size: large;
 }
 
-th {
-    background-color: black;
+.round_row {
+    background-color: rgb(248, 124, 7);
+    height: 20pt;
+    font-size: medium;
 }
+
+.plus_row {
+    font-size: smaller;
+    height: 35pt;
+    background-color: rgb(34, 245, 6);
+}
+
+.minus_row {
+    font-size: smaller;
+    height: 35pt;
+    background-color: rgb(245, 6, 6);
+}
+
+.input_number {
+    height: 20pt;
+    width: 90%;
+}
+
+
+
+
