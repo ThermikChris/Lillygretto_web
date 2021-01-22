@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from backend import get_init_player, get_init_game, next_round, set_new_player, calc_game_state
-# from flask_sqlalchemy import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 import json
 import plotly
