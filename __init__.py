@@ -9,11 +9,11 @@ import numpy as np
 
 app = Flask(__name__)
 app.secret_key = "lillygretto"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
-app.config['SQLALCHEMY_TRACK_MODIFCATIONS'] = False
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+#app.config['SQLALCHEMY_TRACK_MODIFCATIONS'] = False
 #app.permanent_session_lifetime
 
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 
 # class users(db.Model):
 #     _id = db.Column("id", db.Integer, primary_key=True)
