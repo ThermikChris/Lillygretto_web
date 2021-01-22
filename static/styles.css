@@ -22,21 +22,17 @@ td {
 
 .plus_row {
     font-size: smaller;
-    height: 35pt;
+    height: 80pt;
     background-color: rgb(34, 245, 6);
 }
 
 .minus_row {
     font-size: smaller;
-    height: 35pt;
+    height: 80pt;
     background-color: rgb(245, 6, 6);
 }
 
 .input_number {
-    height: 20pt;
+    height: 70pt;
     width: 90%;
 }
-
-
-
-
