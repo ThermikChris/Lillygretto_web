@@ -1,4 +1,5 @@
 # INITIALIZATION
+#my test change
 def get_init_player(count_player):
     player_list = []
     for i in range(count_player):
