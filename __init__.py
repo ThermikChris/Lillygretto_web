@@ -1,6 +1,13 @@
+# cd /var/www/webApp/webApp
+# git pull
+# sudo /etc/init.d/apache2 restart
+#
+# git checkout 
+
+
 from flask import Flask, render_template, request, session, redirect, url_for
 from backend import get_init_player, get_init_game, next_round, set_new_player, calc_game_state
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 import json
 import plotly
 import chart_studio.plotly as py
@@ -9,11 +16,11 @@ import numpy as np
 
 app = Flask(__name__)
 app.secret_key = "lillygretto"
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
-#app.config['SQLALCHEMY_TRACK_MODIFCATIONS'] = False
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+# app.config['SQLALCHEMY_TRACK_MODIFCATIONS'] = False
 #app.permanent_session_lifetime
 
-#db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
 # class users(db.Model):
 #     _id = db.Column("id", db.Integer, primary_key=True)
@@ -80,10 +87,10 @@ def game_change():
             count_rounds += 1
             game_data = next_round(game_data)
         # DEL-PLAYER-BUTTON
-        if request.args.get('btn_del_player'):
-            print('Delete PLAYER')
-            print("TODO")# !!!!!!!!!!!!!!!
-            print (request.args.get('btn_del_player'))
+        # if request.args.get('btn_del_player'):
+        #     print('Delete PLAYER')
+        #     print("TODO")# !!!!!!!!!!!!!!!
+        #     print (request.args.get('btn_del_player'))
         # CHANGE-PLAYER-NAME-FIELD
         for p_i in range(len(player)):
             p_req = request.args.get('player_'+str(p_i+1))
@@ -94,6 +101,7 @@ def game_change():
         if request.args.get('btn_calc') == 'Aktualisieren':
             print('Refresh game-state')
             print("TODO")# !!!!!!!!!!!!!!!!
+            # works already because its refreshed?!
         # CHANGE-GAME-DATA-FIELD
         for req in request.args:
             str_req = str(req)
@@ -136,6 +144,6 @@ def plot_game_state(game_data, player):
     return graphJSON
 
 if __name__ == "__main__":
-    #db.create_all()
+    # db.create_all()
     app.debug = True # --> autoreload
     app.run(host='0.0.0.0', port=80)#(threaded=True)

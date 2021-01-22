@@ -70,7 +70,7 @@
       {% for i_g in range(data|length-1, -1, -1) %}
         <!-- ROW: GAME-STATE -->
         <tr class="game_state_row">
-          <td rowspan="4">{{ i_g + 1 }}</td>
+          <td rowspan="4" style="background-color: blue;">{{ i_g + 1 }}</td>
           <td>SPIELSTAND</td>
           {% for p in data[i_g]['game_points'] %}
           <td>{{ p }}</td>
