@@ -1,3 +1,10 @@
+# cd /var/www/webApp/webApp
+# git pull
+# sudo /etc/init.d/apache2 restart
+#
+# git checkout 
+
+
 from flask import Flask, render_template, request, session, redirect, url_for
 from backend import get_init_player, get_init_game, next_round, set_new_player, calc_game_state
 # from flask_sqlalchemy import SQLAlchemy
@@ -68,27 +75,37 @@ def game_change():
         return "<h1>ERROR: session not loaded</h1>"
 
     if request.method == "GET":
-        # NEW PLAYER
+        # NEW-PLAYER-BUTTON
         if request.args.get('btn_newPlayer') == 'Neuer Spieler':
             print('Neuer SPIELER')
             player = player + ["Spieler_"+str(count_player)]
             count_player += 1
             game_data = set_new_player(game_data)
-        # NEW GAME-ROUND
+        # NEW-GAME-ROUND-BUTTON
         if request.args.get('btn_newRound') == 'Neue Runde':
             print('Neue RUNDE')
             count_rounds += 1
             game_data = next_round(game_data)
-        # CHANGE-PLAYER-NAME
+        # DEL-PLAYER-BUTTON
+        # if request.args.get('btn_del_player'):
+        #     print('Delete PLAYER')
+        #     print("TODO")# !!!!!!!!!!!!!!!
+        #     print (request.args.get('btn_del_player'))
+        # CHANGE-PLAYER-NAME-FIELD
         for p_i in range(len(player)):
             p_req = request.args.get('player_'+str(p_i+1))
             if p_req != player[p_i] and p_req != None:
                 print('Aktualisierter SpielerName')
                 player[p_i] = p_req
-        # CHANGE GAME-DATA
+        # REFRESH-BUTTON
+        if request.args.get('btn_calc') == 'Aktualisieren':
+            print('Refresh game-state')
+            print("TODO")# !!!!!!!!!!!!!!!!
+            # works already because its refreshed?!
+        # CHANGE-GAME-DATA-FIELD
         for req in request.args:
             str_req = str(req)
-            print(str_req)
+            #print(str_req)
             if 'cell' in str_req:
                 if "minus" in str_req:
                     point_name = "minus_points"
@@ -106,7 +123,6 @@ def game_change():
 
 def plot_game_state(game_data, player):
     round_count = len(game_data)
-    print(round_count)
 
     xScale = np.linspace(1, round_count, round_count)
 
