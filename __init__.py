@@ -15,12 +15,12 @@ app.config['SQLALCHEMY_TRACK_MODIFCATIONS'] = False
 
 db = SQLAlchemy(app)
 
-class users(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True)
-    game = db.Column(db.String(100))
+# class users(db.Model):
+#     _id = db.Column("id", db.Integer, primary_key=True)
+#     game = db.Column(db.String(100))
     
-    def __init__(self, game):
-        self.game = game
+#     def __init__(self, game):
+#         self.game = game
 
 @app.route("/")
 @app.route("/lillygretto")
@@ -136,6 +136,6 @@ def plot_game_state(game_data, player):
     return graphJSON
 
 if __name__ == "__main__":
-    db.create_all()
+    #db.create_all()
     app.debug = True # --> autoreload
     app.run(host='0.0.0.0', port=80)#(threaded=True)
